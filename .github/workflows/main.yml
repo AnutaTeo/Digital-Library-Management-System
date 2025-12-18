@@ -21,13 +21,13 @@ jobs:
           java-version: "21"
           cache: maven
 
-      - name: Build all Maven services (skip tests)
+      - name: Build and test all Maven services
         run: |
           set -e
           for dir in */; do
             if [ -f "${dir}pom.xml" ]; then
-              echo "=== Building ${dir} ==="
-              (cd "${dir}" && mvn -B clean package -DskipTests)
+              echo "=== Building and testing ${dir} ==="
+              (cd "${dir}" && mvn -B clean verify)
             fi
           done
 
