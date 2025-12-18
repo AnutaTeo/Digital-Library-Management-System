@@ -30,3 +30,6 @@ jobs:
               (cd "${dir}" && mvn -B clean package -DskipTests)
             fi
           done
+
+      - name: Build Docker images
+        run: docker-compose build
