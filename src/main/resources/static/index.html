@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Library Management System</title>
+  <style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #5e9cff, #6ed4a4);
+        color: #333;
+    }
+    header {
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        padding: 20px;
+        text-align: center;
+    }
+    header h1 {
+        margin: 0;
+        font-size: 2.2em;
+        color: #004c8c;
+    }
+    main {
+        padding: 40px 20px;
+        text-align: center;
+    }
+    .card {
+        background-color: white;
+        display: inline-block;
+        padding: 25px;
+        margin: 20px;
+        width: 300px;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    }
+    .card h2 {
+        color: #007bff;
+        margin-bottom: 15px;
+    }
+    .card p {
+        font-size: 0.95em;
+        color: #555;
+    }
+    footer {
+        background-color: rgba(255, 255, 255, 0.9);
+        text-align: center;
+        padding: 15px;
+        font-size: 0.9em;
+        color: #555;
+    }
+    a.button {
+        display: inline-block;
+        background: #007bff;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 10px;
+        transition: background 0.3s ease;
+    }
+    a.button:hover {
+        background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Digital Library Management System</h1>
+  <p>Search, borrow, and explore books and digital resources</p>
+</header>
+
+<main>
+  <div class="card">
+    <h2>View Recommendations</h2>
+    <p>Discover book recommendations based on your preferences.</p>
+    <a href="/api/recommendations" class="button">View</a>
+  </div>
+
+  <div class="card">
+    <h2>Borrow a Book</h2>
+    <p>Borrow a book by ID and receive notifications about due dates.</p>
+    <a href="/api/borrow/1" class="button">Borrow</a>
+  </div>
+
+  <div class="card">
+    <h2>Create a Book</h2>
+    <p>Use our API endpoint to build and add new books to the catalog.</p>
+    <a href="/api/books/book1" class="button">Sample Book</a>
+  </div>
+</main>
+
+<footer>
+ Digital Library Management System - Teodorescu Ana-Maria & Surugiu Ioana-Monica
+</footer>
+</body>
+</html>
