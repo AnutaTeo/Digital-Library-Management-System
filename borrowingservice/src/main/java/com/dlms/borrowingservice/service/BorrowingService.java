@@ -3,6 +3,7 @@ package com.dlms.borrowingservice.service;
 import com.dlms.borrowingservice.dto.BorrowRequest;
 import com.dlms.borrowingservice.model.Borrowing;
 import com.dlms.borrowingservice.repository.BorrowingRepository;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,10 +14,12 @@ public class BorrowingService {
 
     private final BorrowingRepository repository;
     private final RestTemplate restTemplate;
+    private final RabbitTemplate rabbitTemplate;
 
-    public BorrowingService(BorrowingRepository repository, RestTemplate restTemplate) {
+    public BorrowingService(BorrowingRepository repository, RestTemplate restTemplate, RabbitTemplate rabbitTemplate) {
         this.repository = repository;
         this.restTemplate = restTemplate;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     public Borrowing borrowBook(BorrowRequest request) {
@@ -44,8 +47,16 @@ public class BorrowingService {
                 LocalDate.now(),
                 LocalDate.now().plusWeeks(2)
         );
+        Borrowing savedBorrowing = repository.save(borrowing);
 
-        return repository.save(borrowing);
+        rabbitTemplate.convertAndSend(
+                "library.events",
+                "borrowing.created",
+                "Borrow created for user " + savedBorrowing.getUserId()
+                        + " and book " + savedBorrowing.getBookId()
+        );
+
+        return savedBorrowing;
     }
 
     public Borrowing getBorrowing(Long id) {
